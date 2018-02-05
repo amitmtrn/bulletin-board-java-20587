@@ -8,22 +8,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "topics")
-public class Topic  {
+@Table(name="comments")
+public class Comment {
 
 	@Id
 	@GeneratedValue
 	long id;
 	
-	@Column(nullable=false)
-	String title;
-	
-	@Column(nullable=false)
-	String body;
-	
 	@ManyToOne(targetEntity=User.class)
 	long user;
 	
+	@Column(nullable=false)
+	String title;
+	
+	String body;
+
+	@ManyToOne(targetEntity=Topic.class, optional=false)
+	long topic;
+	
+	public void setTopic(Long topic) {
+		this.topic = topic;
+		
+	}
+
 	public long getId() {
 		return this.id;
 	}

@@ -16,13 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class TopicController {
 	
 	@Autowired
-	TopicJpaRepository repository;
+	TopicJpaRepository topicRepository;
+	
+	@Autowired
+	CommentJpaRepository commentRepository;
 	
 	@GetMapping("/topics")
 	public List<Topic> getAll() {
 		List<Topic> list = new ArrayList<Topic>();
 		
-		repository.findAll().forEach(list::add);
+		topicRepository.findAll().forEach(list::add);
 		return list;
 	}
 	
@@ -31,7 +34,7 @@ public class TopicController {
 		if(t.getId() != 0)
 			return null;
 		
-		return repository.save(t);
+		return topicRepository.save(t);
 	}
 	
 	@PutMapping("/topics")
@@ -39,12 +42,44 @@ public class TopicController {
 		if(t.getId() == 0)
 			return null;
 		
-		return repository.save(t);
+		return topicRepository.save(t);
 	}
 	
 	@DeleteMapping("/topics/{id}")
 	public void deleteTopic(@PathVariable(value = "id") Long id) {
 		
-		repository.deleteById(id);
+		topicRepository.deleteById(id);
 	}
+
+	@GetMapping("/topics/{id}/comments")
+	public List<Comment> getAllComment(@PathVariable(value = "id") Long id) {
+		return topicRepository.findComments(id);
+	}
+
+	@PostMapping("/topics/{id}/comments")
+	public Comment addComment(@PathVariable(value = "id") Long id, @RequestBody Comment c) {
+		if(c.getId() != 0)
+			return null;
+		
+		c.setTopic(id);
+		
+		return commentRepository.save(c);
+	}
+
+	@PutMapping("/topics/{id}/comments")
+	public Comment editComment(@PathVariable(value = "id") Long id, @RequestBody Comment c) {
+		if(c.getId() == 0)
+			return null;
+		
+		c.setTopic(id);
+		
+		return commentRepository.save(c);
+	}
+
+
+	@DeleteMapping("/topics/{topicId}/comments/{commentId}")
+	public void deleteComment(@PathVariable(value = "topicId") Long topicId, @PathVariable(value = "commentId") Long commentId) {
+		commentRepository.deleteById(commentId);
+	}
+
 }
