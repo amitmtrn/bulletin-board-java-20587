@@ -20,10 +20,10 @@ public class PrivateMessage {
 	@ManyToOne(targetEntity=User.class)
 	long to;
 
-	@Column(columnDefinition="default true")
+	@Column(columnDefinition="boolean default true")
 	boolean fromVisable;
 
-	@Column(columnDefinition="default true")
+	@Column(columnDefinition="boolean default true")
 	boolean toVisable;
 
 	public long getTo() {
