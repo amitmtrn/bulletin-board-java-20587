@@ -1,4 +1,4 @@
-package com.openu.forum;
+package com.openu.forum.comments;
 
 import org.springframework.data.repository.CrudRepository;
 

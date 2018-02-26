@@ -1,4 +1,4 @@
-package com.openu.forum;
+package com.openu.forum.topics;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.openu.forum.users.User;
 
 @Entity
 @Table(name = "topics")

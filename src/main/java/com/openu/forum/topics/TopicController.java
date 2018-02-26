@@ -1,4 +1,4 @@
-package com.openu.forum;
+package com.openu.forum.topics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.openu.forum.comments.Comment;
+import com.openu.forum.comments.CommentJpaRepository;
 
 @RestController
 public class TopicController {

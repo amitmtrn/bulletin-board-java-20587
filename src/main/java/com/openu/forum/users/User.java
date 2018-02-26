@@ -1,4 +1,4 @@
-package com.openu.forum;
+package com.openu.forum.users;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

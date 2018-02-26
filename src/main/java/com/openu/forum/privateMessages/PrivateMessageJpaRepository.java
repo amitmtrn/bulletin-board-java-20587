@@ -1,4 +1,4 @@
-package com.openu.forum;
+package com.openu.forum.privateMessages;
 
 import java.util.List;
 
