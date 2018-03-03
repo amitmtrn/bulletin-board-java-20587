@@ -12,6 +12,8 @@ public class User {
 	@GeneratedValue
 	long id;
 	
-	String password;
 	String username;
+	String password;
+	Boolean enabled;
+	String role;
 }
