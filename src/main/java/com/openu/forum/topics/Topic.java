@@ -29,4 +29,9 @@ public class Topic  {
 	public long getId() {
 		return this.id;
 	}
+
+	public void setUser(User user) {
+		this.user = user.getId();
+	}
+
 }

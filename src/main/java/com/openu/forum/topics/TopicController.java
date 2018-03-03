@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,12 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openu.forum.comments.Comment;
 import com.openu.forum.comments.CommentJpaRepository;
+import com.openu.forum.users.User;
+import com.openu.forum.users.UserJpaRepository;
 
 @RestController
 public class TopicController {
 	
 	@Autowired
 	TopicJpaRepository topicRepository;
+	
+	@Autowired
+	UserJpaRepository userRepository;
 	
 	@Autowired
 	CommentJpaRepository commentRepository;
@@ -33,11 +40,16 @@ public class TopicController {
 	}
 	
 	@PostMapping("/topics")
-	public Topic addTopic(@RequestBody Topic t) {
-		if(t.getId() != 0)
+	public Topic addTopic(@RequestBody Topic topic, Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		User user = userRepository.findByUsername(userDetails.getUsername());
+		
+		topic.setUser(user);
+
+		if(topic.getId() != 0)
 			return null;
 		
-		return topicRepository.save(t);
+		return topicRepository.save(topic);
 	}
 	
 	@PutMapping("/topics")

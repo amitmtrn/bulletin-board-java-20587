@@ -13,7 +13,8 @@
       "stopOnEntry": false,
       "mainClass": "com.openu.forum.ForumApplication",
       "projectName": "forum",
-      "args": ""
+      "args": "",
+      "preLaunchTask": "ng build"
     },
     {
       "type": "java",

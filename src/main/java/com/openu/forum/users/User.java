@@ -28,4 +28,8 @@ public class User {
 	public String getPassword() {
 		return this.password;
 	}
+
+	public long getId() {
+		return this.id;
+	}
 }

@@ -1,0 +1,21 @@
+<form (ngSubmit)="register(form.value)" #form="ngForm">
+  <div>
+    <input #emailInput="ngModel" type="email" required name="username" placeholder="username" ngModel email>
+    <div *ngIf="emailInput.errors">
+      this field is:
+      <ul>
+        <li *ngFor="let error of keys(emailInput.errors)">{{error}}</li>
+      </ul>
+    </div>
+  </div>
+  <div>
+    <input #passwordInput="ngModel" type="password" required name="password" placeholder="password" ngModel>
+    <div *ngIf="passwordInput.errors">
+        this field is:
+        <ul>
+        <li *ngFor="let error of keys(passwordInput.errors)">{{error}}</li>
+      </ul>
+    </div>
+  </div>
+<button [disabled]="!form.valid">register</button>
+</form>
