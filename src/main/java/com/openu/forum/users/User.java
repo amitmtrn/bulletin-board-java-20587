@@ -14,6 +14,18 @@ public class User {
 	
 	String username;
 	String password;
-	Boolean enabled;
-	String role;
+	Boolean enabled = true;
+	String role = "USER";
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
 }
