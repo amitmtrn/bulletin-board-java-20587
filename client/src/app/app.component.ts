@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.auth.userDetails.subscribe(userDetails => {
+    this.auth.getUserDetails().subscribe(userDetails => {
       if (userDetails.id !== null) {
         this.isLoggedIn = true;
       } else {

@@ -2,7 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import {WebStorageModule, LocalStorageService} from 'angular2-localstorage';
 
 import { AuthService } from './auth.service';
 
@@ -30,10 +31,11 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
+    WebStorageModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService],
+  providers: [AuthService, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
