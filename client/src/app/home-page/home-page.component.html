@@ -1,5 +1,12 @@
 <ul>
-  <li *ngFor="let topic of topics">
-    {{topic.title}} - {{topic.body}} <button (click)="deleteTopic(topic.id)">delete</button>
-  </li>
+
+  <details *ngFor="let topic of topics">
+    <summary>{{topic.title}}</summary>
+    {{topic.body}}
+    <button (click)="deleteTopic(topic.id)">delete</button>
+    <details>
+        <summary>Comments</summary>
+
+    </details>
+  </details>
 </ul>

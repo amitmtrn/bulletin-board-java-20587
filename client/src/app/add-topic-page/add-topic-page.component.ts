@@ -16,7 +16,7 @@ export class AddTopicPageComponent implements OnInit {
 
   addTopic(topic: Topic) {
     this.topicService.addTopic(topic).subscribe(() => {
-      this.router.navigate(['home']);
+      this.router.navigate(['']);
     });
   }
 }
