@@ -1,0 +1,11 @@
+<form #f="ngForm" (ngSubmit)="addTopic(f.value)">
+  <label>
+    title
+    <input type="text" name="title" ngModel>
+  </label>
+  <label>
+      body
+    <textarea cols="30" rows="10" name="body" ngModel></textarea>
+  </label>
+  <button type="submit">submit</button>
+</form>

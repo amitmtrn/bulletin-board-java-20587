@@ -26,10 +26,10 @@ public class Comment {
 	
 	String body;
 
-	@ManyToOne(targetEntity=Topic.class, optional=false)
-	long topic;
+	@ManyToOne(optional=false)
+	Topic topic;
 	
-	public void setTopic(Long topic) {
+	public void setTopic(Topic topic) {
 		this.topic = topic;
 		
 	}

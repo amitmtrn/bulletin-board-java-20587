@@ -14,24 +14,22 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openu.forum.comments.Comment;
-import com.openu.forum.comments.CommentJpaRepository;
-import com.openu.forum.users.User;
-import com.openu.forum.users.UserJpaRepository;
+import com.openu.forum.comments.*;
+import com.openu.forum.users.*;
 
 @RestController
 public class TopicController {
-	
+
+	@Autowired
+	UserJpaRepository userRepository;
+
 	@Autowired
 	TopicJpaRepository topicRepository;
 	
 	@Autowired
-	UserJpaRepository userRepository;
-	
-	@Autowired
 	CommentJpaRepository commentRepository;
 	
-	@GetMapping("/topics")
+	@GetMapping("/api/topics")
 	public List<Topic> getAll() {
 		List<Topic> list = new ArrayList<Topic>();
 		
@@ -39,7 +37,7 @@ public class TopicController {
 		return list;
 	}
 	
-	@PostMapping("/topics")
+	@PostMapping("/api/topics")
 	public Topic addTopic(@RequestBody Topic topic, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User user = userRepository.findByUsername(userDetails.getUsername());
@@ -52,7 +50,7 @@ public class TopicController {
 		return topicRepository.save(topic);
 	}
 	
-	@PutMapping("/topics")
+	@PutMapping("/api/topics")
 	public Topic editTopic(@RequestBody Topic t) {
 		if(t.getId() == 0)
 			return null;
@@ -60,39 +58,39 @@ public class TopicController {
 		return topicRepository.save(t);
 	}
 	
-	@DeleteMapping("/topics/{id}")
+	@DeleteMapping("/api/topics/{id}")
 	public void deleteTopic(@PathVariable(value = "id") Long id) {
 		
 		topicRepository.deleteById(id);
 	}
 
-	@GetMapping("/topics/{id}/comments")
+	@GetMapping("/api/topics/{id}/comments")
 	public List<Comment> getAllComment(@PathVariable(value = "id") Long id) {
 		return topicRepository.findComments(id);
 	}
 
-	@PostMapping("/topics/{id}/comments")
+	@PostMapping("/api/topics/{id}/comments")
 	public Comment addComment(@PathVariable(value = "id") Long id, @RequestBody Comment c) {
 		if(c.getId() != 0)
 			return null;
 		
-		c.setTopic(id);
+		// c.setTopic(id);
 		
 		return commentRepository.save(c);
 	}
 
-	@PutMapping("/topics/{id}/comments")
+	@PutMapping("/api/topics/{id}/comments")
 	public Comment editComment(@PathVariable(value = "id") Long id, @RequestBody Comment c) {
 		if(c.getId() == 0)
 			return null;
 		
-		c.setTopic(id);
+		// c.setTopic(id);
 		
 		return commentRepository.save(c);
 	}
 
 
-	@DeleteMapping("/topics/{topicId}/comments/{commentId}")
+	@DeleteMapping("/api/topics/{topicId}/comments/{commentId}")
 	public void deleteComment(@PathVariable(value = "topicId") Long topicId, @PathVariable(value = "commentId") Long commentId) {
 		commentRepository.deleteById(commentId);
 	}

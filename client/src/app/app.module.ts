@@ -6,15 +6,18 @@ import { HttpClientModule } from '@angular/common/http';
 import {WebStorageModule, LocalStorageService} from 'angular2-localstorage';
 
 import { AuthService } from './auth.service';
+import { TopicService } from './topic.service';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { Error404PageComponent } from './error-404-page/error-404-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AddTopicPageComponent } from './add-topic-page/add-topic-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
+  { path: 'add-topic', component: AddTopicPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
   { path: '**', component: Error404PageComponent }
@@ -26,7 +29,8 @@ const routes: Routes = [
     LoginPageComponent,
     RegisterPageComponent,
     Error404PageComponent,
-    HomePageComponent
+    HomePageComponent,
+    AddTopicPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +39,7 @@ const routes: Routes = [
     WebStorageModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService, LocalStorageService],
+  providers: [AuthService, TopicService, LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

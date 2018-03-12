@@ -19,6 +19,12 @@ export class AuthService {
     }
   }
 
+  public getHeaders(): HttpHeaders {
+    return new HttpHeaders({
+      Authorization: this.auth
+    });
+  }
+
   getUserDetails(): Observable<{id: number, username: string}> {
     return this.userDetails;
   }

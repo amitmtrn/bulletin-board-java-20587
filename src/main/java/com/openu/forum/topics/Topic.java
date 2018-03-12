@@ -23,15 +23,37 @@ public class Topic  {
 	@Column(nullable=false)
 	String body;
 	
-	@ManyToOne(targetEntity=User.class)
-	long user;
+	@ManyToOne
+	User user;
 	
+
+	/**
+	 * @param body the body to set
+	 */
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
 	public long getId() {
 		return this.id;
 	}
 
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	public void setUser(User user) {
-		this.user = user.getId();
+		this.user = user;
 	}
 
 }

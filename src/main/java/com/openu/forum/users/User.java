@@ -32,4 +32,11 @@ public class User {
 	public long getId() {
 		return this.id;
 	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(long id) {
+		this.id = id;
+	}
 }
