@@ -17,6 +17,7 @@ import { AddTopicPageComponent } from './add-topic-page/add-topic-page.component
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
+  { path: 'home', component: HomePageComponent },
   { path: 'add-topic', component: AddTopicPageComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },

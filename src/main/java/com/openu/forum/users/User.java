@@ -33,10 +33,7 @@ public class User {
 		return this.id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(long id) {
-		this.id = id;
+	public boolean equals(User user) {
+		return this.id == user.id;
 	}
 }

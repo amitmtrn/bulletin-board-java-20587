@@ -2,6 +2,7 @@ package com.openu.forum.topics;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -59,9 +60,15 @@ public class TopicController {
 	}
 	
 	@DeleteMapping("/api/topics/{id}")
-	public void deleteTopic(@PathVariable(value = "id") Long id) {
-		
-		topicRepository.deleteById(id);
+	public void deleteTopic(@PathVariable(value = "id") Long id, Authentication authentication) {
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		User user = userRepository.findByUsername(userDetails.getUsername());
+		Topic topic = topicRepository.findById(id).get();
+
+		if(topic.haveUser(user)) {
+			topicRepository.deleteById(id);
+		}
+
 	}
 
 	@GetMapping("/api/topics/{id}/comments")

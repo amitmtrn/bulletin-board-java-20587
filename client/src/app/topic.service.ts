@@ -19,4 +19,14 @@ export class TopicService {
     return this.http.post<Topic>('/api/topics', topic, { headers });
   }
 
+  getTopics(): Observable<Topic[]> {
+    return this.http.get<Topic[]>('/api/topics');
+  }
+
+  deleteTopic(topicId: number) {
+    const headers = this.auth.getHeaders();
+
+    return this.http.delete('/api/topics/' + topicId, { headers });
+  }
+
 }

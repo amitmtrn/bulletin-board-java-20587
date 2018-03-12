@@ -1,3 +1,5 @@
-<div>
-  put here the topics list
-</div>
+<ul>
+  <li *ngFor="let topic of topics">
+    {{topic.title}} - {{topic.body}} <button (click)="deleteTopic(topic.id)">delete</button>
+  </li>
+</ul>

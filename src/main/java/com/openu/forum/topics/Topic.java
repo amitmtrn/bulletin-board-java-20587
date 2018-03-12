@@ -35,6 +35,20 @@ public class Topic  {
 	}
 
 	/**
+	 * @return the body
+	 */
+	public String getBody() {
+		return body;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
 	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
@@ -56,4 +70,14 @@ public class Topic  {
 		this.user = user;
 	}
 
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	public boolean haveUser(User user) {
+		return this.user.equals(user);
+	}
 }
