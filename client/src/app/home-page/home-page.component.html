@@ -1,12 +1,25 @@
 <ul>
 
   <details *ngFor="let topic of topics">
-    <summary>{{topic.title}}</summary>
+    <summary>{{topic.title}} by: {{topic.user}}</summary>
     {{topic.body}}
     <button (click)="deleteTopic(topic.id)">delete</button>
     <details>
         <summary>Comments</summary>
+        <ul *ngIf="topic.comments">
+          <li *ngFor="let comment of topic.comments">
+            {{comment.title}}<br>{{comment.body}} - {{comment.user}}
+          </li>
+          <form #f="ngForm" (ngSubmit)="addComment(topic.id, f.value)">
+            <label>
+              title
+              <input type="text" name="title" ngModel>
+              <textarea name="body" cols="30" rows="10" ngModel></textarea>
+            </label>
 
+            <button type="submit">submit</button>
+          </form>
+        </ul>
     </details>
   </details>
 </ul>

@@ -31,4 +31,10 @@ export class HomePageComponent implements OnInit {
     }
   }
 
+  addComment(topicId: number, comment: {title: string, body: string}): void {
+    this.topicService.addComment(topicId, comment).subscribe(res => {
+      this.updateTopics();
+    });
+  }
+
 }

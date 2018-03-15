@@ -13,6 +13,12 @@ export class TopicService {
 
   constructor(private auth: AuthService, private http: HttpClient) { }
 
+  addComment(topicId, comment): Observable<any> {
+    const headers = this.auth.getHeaders();
+
+    return this.http.post(`/api/topics/${topicId}/comments`, comment, { headers });
+  }
+
   addTopic(topic): Observable<Topic> {
     const headers = this.auth.getHeaders();
 
