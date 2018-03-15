@@ -1,12 +1,17 @@
 package com.openu.forum.topics;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderColumn;
 import javax.persistence.Table;
 
+import com.openu.forum.comments.Comment;
 import com.openu.forum.users.User;
 
 @Entity
@@ -26,12 +31,26 @@ public class Topic  {
 	@ManyToOne
 	User user;
 	
+	@OrderColumn
+	@OneToMany
+	List<Comment> comments;
 
 	/**
 	 * @param body the body to set
 	 */
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	/**
+	 * @return the comments
+	 */
+	public List<Comment> getComments() {
+		return comments;
+	}
+	
+	public void addComment(Comment comment) {
+		this.comments.add(comment);
 	}
 
 	/**
@@ -73,8 +92,8 @@ public class Topic  {
 	/**
 	 * @return the user
 	 */
-	public User getUser() {
-		return user;
+	public String getUser() {
+		return this.user.getUsername();
 	}
 
 	public boolean haveUser(User user) {

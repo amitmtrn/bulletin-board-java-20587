@@ -14,7 +14,7 @@
       "mainClass": "com.openu.forum.ForumApplication",
       "projectName": "forum",
       "args": "",
-      "preLaunchTask": "ng build"
+      // "preLaunchTask": "ng build"
     },
     {
       "type": "java",

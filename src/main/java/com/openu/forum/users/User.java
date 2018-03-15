@@ -33,6 +33,13 @@ public class User {
 		return this.id;
 	}
 
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
 	public boolean equals(User user) {
 		return this.id == user.id;
 	}

@@ -2,7 +2,7 @@
   <li [routerLink]="['']" >home</li>
   <li [routerLink]="['register']" *ngIf="!isLoggedIn">register</li>
   <li [routerLink]="['login']" *ngIf="!isLoggedIn">login</li>
-  <li [routerLink]="['add-topic']">new topic</li>
+  <li *ngIf="isLoggedIn" [routerLink]="['add-topic']">new topic</li>
   <li *ngIf="isLoggedIn">welcome {{username}}</li>
   <li *ngIf="isLoggedIn" (click)="logout()">logout</li>
 </menu>

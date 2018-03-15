@@ -31,13 +31,13 @@ public class PrivateMessageController {
 		
 		PrivateMessage m = om.get();
 		
-		if(m.getTo() == userId) {
-			m.setToVisable(false);
-		}
+		// if(m.getTo() == userId) {
+		// 	m.setToVisable(false);
+		// }
 
-		else if(m.getFrom() == userId) {
-			m.setFromVisable(false);
-		}
+		// else if(m.getFrom() == userId) {
+		// 	m.setFromVisable(false);
+		// }
 		
 		return repository.save(m);
 	}

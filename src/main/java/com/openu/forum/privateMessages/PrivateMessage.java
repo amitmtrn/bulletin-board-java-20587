@@ -16,11 +16,11 @@ public class PrivateMessage {
 	@GeneratedValue
 	long id;
 	
-	@ManyToOne(targetEntity=User.class)
-	long from;
+	@ManyToOne
+	User from;
 	
-	@ManyToOne(targetEntity=User.class)
-	long to;
+	@ManyToOne
+	User to;
 
 	@Column(columnDefinition="boolean default true")
 	boolean fromVisable;
@@ -28,7 +28,7 @@ public class PrivateMessage {
 	@Column(columnDefinition="boolean default true")
 	boolean toVisable;
 
-	public long getTo() {
+	public User getTo() {
 		return this.to;
 	}
 
@@ -36,7 +36,7 @@ public class PrivateMessage {
 		this.toVisable = b;
 	}
 
-	public long getFrom() {
+	public User getFrom() {
 		return this.from;
 	}
 

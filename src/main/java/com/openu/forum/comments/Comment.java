@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.openu.forum.topics.Topic;
 import com.openu.forum.users.User;
 
 @Entity
@@ -18,23 +17,56 @@ public class Comment {
 	@GeneratedValue
 	long id;
 	
-	@ManyToOne(targetEntity=User.class)
-	long user;
+	@ManyToOne
+	User user;
 	
 	@Column(nullable=false)
 	String title;
 	
 	String body;
 
-	@ManyToOne(optional=false)
-	Topic topic;
-	
-	public void setTopic(Topic topic) {
-		this.topic = topic;
-		
-	}
-
 	public long getId() {
 		return this.id;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	/**
+	 * @param body the body to set
+	 */
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	/**
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	/**
+	 * @return the body
+	 */
+	public String getBody() {
+		return body;
+	}
+
+	/**
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * @return the user
+	 */
+	public String getUser() {
+		return this.user.getUsername();
 	}
 }

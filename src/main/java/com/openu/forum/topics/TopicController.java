@@ -70,27 +70,23 @@ public class TopicController {
 
 	}
 
-	@GetMapping("/api/topics/{id}/comments")
-	public List<Comment> getAllComment(@PathVariable(value = "id") Long id) {
-		return topicRepository.findComments(id);
-	}
-
 	@PostMapping("/api/topics/{id}/comments")
-	public Comment addComment(@PathVariable(value = "id") Long id, @RequestBody Comment c) {
-		if(c.getId() != 0)
-			return null;
+	public void addComment(@PathVariable(value = "id") Long id, @RequestBody Comment c, Authentication authentication) {
+		Topic topic = topicRepository.findById(id).get();		
+		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+		User user = userRepository.findByUsername(userDetails.getUsername());
 		
-		// c.setTopic(id);
-		
-		return commentRepository.save(c);
+		c.setUser(user);
+		Comment comment = commentRepository.save(c);
+
+		topic.addComment(comment);
+		topicRepository.save(topic);
 	}
 
 	@PutMapping("/api/topics/{id}/comments")
 	public Comment editComment(@PathVariable(value = "id") Long id, @RequestBody Comment c) {
 		if(c.getId() == 0)
 			return null;
-		
-		// c.setTopic(id);
 		
 		return commentRepository.save(c);
 	}
