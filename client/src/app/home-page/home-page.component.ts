@@ -37,4 +37,10 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  deleteComment(commentId: string) {
+    this.topicService.deleteComment(commentId).subscribe(() => {
+      this.updateTopics();
+    });
+  }
+
 }

@@ -92,8 +92,8 @@ public class TopicController {
 	}
 
 
-	@DeleteMapping("/api/topics/{topicId}/comments/{commentId}")
-	public void deleteComment(@PathVariable(value = "topicId") Long topicId, @PathVariable(value = "commentId") Long commentId) {
+	@DeleteMapping("/api/comments/{commentId}")
+	public void deleteComment(@PathVariable(value = "commentId") Long commentId) {
 		commentRepository.deleteById(commentId);
 	}
 

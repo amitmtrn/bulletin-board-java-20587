@@ -19,6 +19,12 @@ export class TopicService {
     return this.http.post(`/api/topics/${topicId}/comments`, comment, { headers });
   }
 
+  deleteComment(commentId: string) {
+    const headers = this.auth.getHeaders();
+
+    return this.http.delete(`/api/comments/${commentId}`, { headers });
+  }
+
   addTopic(topic): Observable<Topic> {
     const headers = this.auth.getHeaders();
 

@@ -1,5 +1,4 @@
 <ul>
-
   <details *ngFor="let topic of topics">
     <summary>{{topic.title}} by: {{topic.user}}</summary>
     {{topic.body}}
@@ -8,7 +7,8 @@
         <summary>Comments</summary>
         <ul *ngIf="topic.comments">
           <li *ngFor="let comment of topic.comments">
-            {{comment.title}}<br>{{comment.body}} - {{comment.user}}
+            {{comment.title}}<br>{{comment.body}} - {{comment.user}} <br>
+            <button (click)="deleteComment(comment.id)" type="button">delete</button>
           </li>
           <form #f="ngForm" (ngSubmit)="addComment(topic.id, f.value)">
             <label>
