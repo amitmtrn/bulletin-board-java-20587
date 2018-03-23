@@ -1,21 +1,28 @@
-<form (ngSubmit)="register(form.value)" #form="ngForm">
-  <div>
-    <input #emailInput="ngModel" type="email" required name="username" placeholder="username" ngModel email>
-    <div *ngIf="emailInput.errors">
-      this field is:
-      <ul>
+<form class="form-register" (ngSubmit)="register(form.value)" #form="ngForm">
+  <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+  <label for="inputEmail" class="sr-only">Email address</label>
+  <div class="input-group">
+    <input #emailInput="ngModel" name="username" type="email" id="inputEmail" class="form-control" placeholder="Email address"
+      required autofocus ngModel email>
+    <div class="input-group-prepend" ngbDropdown *ngIf="emailInput.errors">
+      <button class="btn btn-danger fas fa-exclamation-triangle" ngbDropdownToggle type="button"></button>
+      <ul class="dropdown-menu" ngbDropdownMenu>
         <li *ngFor="let error of keys(emailInput.errors)">{{error}}</li>
       </ul>
     </div>
   </div>
-  <div>
-    <input #passwordInput="ngModel" type="password" required name="password" placeholder="password" ngModel>
-    <div *ngIf="passwordInput.errors">
-        this field is:
-        <ul>
+
+  <label for="inputPassword" class="sr-only">Password</label>
+  <div class="input-group">
+    <input #passwordInput="ngModel" name="password" type="password" id="inputPassword" class="form-control" placeholder="Password"
+      required ngModel>
+    <div class="input-group-prepend" ngbDropdown *ngIf="passwordInput.errors">
+      <button class="btn btn-danger fas fa-exclamation-triangle" ngbDropdownToggle type="button"></button>
+      <ul class="dropdown-menu" ngbDropdownMenu>
         <li *ngFor="let error of keys(passwordInput.errors)">{{error}}</li>
       </ul>
     </div>
   </div>
-<button [disabled]="!form.valid">register</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
 </form>

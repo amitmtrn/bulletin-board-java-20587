@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {WebStorageModule, LocalStorageService} from 'angular2-localstorage';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WebStorageModule, LocalStorageService } from 'angular2-localstorage';
 
 import { AuthService } from './auth.service';
 import { TopicService } from './topic.service';
@@ -37,6 +38,7 @@ const routes: Routes = [
     FormsModule,
     HttpClientModule,
     WebStorageModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
   providers: [AuthService, TopicService, LocalStorageService],
