@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { TopicService, Topic } from '../topic.service';
+import { TopicService, Topic, Comment } from '../topic.service';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-home-page',
@@ -31,7 +31,7 @@ export class HomePageComponent implements OnInit {
     }
   }
 
-  addComment(topicId: number, comment: {title: string, body: string}): void {
+  addComment(topicId: number, comment: Comment): void {
     this.topicService.addComment(topicId, comment).subscribe(res => {
       this.updateTopics();
     });

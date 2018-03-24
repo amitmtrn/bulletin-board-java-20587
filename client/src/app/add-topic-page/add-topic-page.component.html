@@ -1,11 +1,12 @@
-<form #f="ngForm" (ngSubmit)="addTopic(f.value)">
-  <label>
-    title
-    <input type="text" name="title" ngModel>
-  </label>
-  <label>
-      body
-    <textarea cols="30" rows="10" name="body" ngModel></textarea>
-  </label>
-  <button type="submit">submit</button>
-</form>
+<div class="container jumbotron">
+<form class="form" (ngSubmit)="addTopic()">
+    <div class="form-group">
+      <label for="staticEmail2" class="sr-only">Title</label>
+      <input type="text" class="form-control" id="staticEmail2" name="title" [(ngModel)]="topic.title" placeholder="Title">
+    </div>
+    <div class="form-group custom-field">
+      <app-ngx-editor minHeight="300px" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="topic.body" name="body"></app-ngx-editor>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

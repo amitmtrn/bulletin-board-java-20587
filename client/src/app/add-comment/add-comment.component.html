@@ -1,0 +1,12 @@
+<div class="container jumbotron">
+    <form class="form" (ngSubmit)="addComment()">
+        <div class="form-group">
+          <label for="staticEmail2" class="sr-only">Title</label>
+          <input type="text" class="form-control" id="staticEmail2" name="title" [(ngModel)]="comment.title" placeholder="Title">
+        </div>
+        <div class="form-group custom-field">
+          <app-ngx-editor minHeight="300px" [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="comment.body" name="body"></app-ngx-editor>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>

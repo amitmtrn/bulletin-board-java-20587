@@ -3,9 +3,16 @@ import { AuthService } from './auth.service';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
-export interface Topic {
+export interface Comment {
   title: string;
   body: string;
+}
+
+export interface Topic {
+  id: number;
+  title: string;
+  body: string;
+  comments: Comment[];
 }
 
 @Injectable()

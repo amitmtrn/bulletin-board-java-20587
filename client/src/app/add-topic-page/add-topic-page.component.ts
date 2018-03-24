@@ -8,14 +8,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-topic-page.component.css']
 })
 export class AddTopicPageComponent implements OnInit {
+  topic = {
+    title: '',
+    body: ''
+  };
 
   constructor(private topicService: TopicService, private router: Router) { }
 
   ngOnInit() {
   }
 
-  addTopic(topic: Topic) {
-    this.topicService.addTopic(topic).subscribe(() => {
+  addTopic() {
+    this.topicService.addTopic(this.topic).subscribe(() => {
       this.router.navigate(['']);
     });
   }
