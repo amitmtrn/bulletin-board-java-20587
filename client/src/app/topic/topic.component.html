@@ -4,10 +4,8 @@
       <h1 class="display-4">Forum</h1>
     </div>
     <div class="col-3 text-right">
-      <div class="row">
-        <button type="button" (click)="deleteTopic(topic.id)" class="btn btn-danger col">Delete Topic</button>
-        <button type="button" class="btn btn-primary col" [routerLink]="['/add-comment', topic.id]">Add Comment</button>
-      </div>
+      <button type="button" (click)="deleteTopic(topic.id)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/add-comment', topic.id]"><i class="fas fa-plus-circle"></i></button>
     </div>
   </div>
   <div class="card w-100">
@@ -41,7 +39,7 @@
               <span>{{comment.user}}</span><br>
               {{comment.date}}
           </small>
-          <button (click)="deleteComment(comment.id)" class="btn btn-danger">Delete Comment</button>
+          <button (click)="deleteComment(comment.id)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
   </div>
