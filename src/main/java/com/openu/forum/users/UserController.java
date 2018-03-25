@@ -29,6 +29,8 @@ public class UserController {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User user = repository.findByUsername(userDetails.getUsername());
 
+		user.setPassword("");
+
 		return user;
 	}
 

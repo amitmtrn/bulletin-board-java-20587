@@ -1,5 +1,6 @@
 package com.openu.forum.users;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +13,9 @@ public class User {
 	@GeneratedValue
 	long id;
 	
+	@Column(unique=true)	
 	String username;
+
 	String password;
 	Boolean enabled = true;
 	String role = "USER";
