@@ -44,18 +44,7 @@ public class TopicController {
 		
 		topic.setUser(user);
 
-		if(topic.getId() != 0)
-			return null;
-		
 		return topicRepository.save(topic);
-	}
-	
-	@PutMapping("/api/topics")
-	public Topic editTopic(@RequestBody Topic t) {
-		if(t.getId() == 0)
-			return null;
-		
-		return topicRepository.save(t);
 	}
 	
 	@DeleteMapping("/api/topics/{id}")
@@ -75,22 +64,16 @@ public class TopicController {
 		Topic topic = topicRepository.findById(id).get();		
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User user = userRepository.findByUsername(userDetails.getUsername());
-		
+		long commentId = c.getId();
+
 		c.setUser(user);
 		Comment comment = commentRepository.save(c);
 
-		topic.addComment(comment);
-		topicRepository.save(topic);
+		if(commentId == 0) {
+			topic.addComment(comment);
+			topicRepository.save(topic);
+		}
 	}
-
-	@PutMapping("/api/topics/{id}/comments")
-	public Comment editComment(@PathVariable(value = "id") Long id, @RequestBody Comment c) {
-		if(c.getId() == 0)
-			return null;
-		
-		return commentRepository.save(c);
-	}
-
 
 	@DeleteMapping("/api/comments/{commentId}")
 	public void deleteComment(@PathVariable(value = "commentId") Long commentId) {

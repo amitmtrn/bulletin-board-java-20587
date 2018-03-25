@@ -22,6 +22,8 @@ import { AddCommentComponent } from './add-comment/add-comment.component';
 const routes: Routes = [
   { path: '', component: HomePageComponent },
   { path: 'add-topic', component: AddTopicPageComponent },
+  { path: 'edit-topic/:id', component: AddTopicPageComponent },
+  { path: 'edit-comment/:topicId/:commentId', component: AddCommentComponent },
   { path: 'add-comment/:topicId', component: AddCommentComponent },
   { path: 'topic/:id', component: TopicComponent },
   { path: 'login', component: LoginPageComponent },
