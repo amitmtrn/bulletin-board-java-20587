@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.openu.forum.users.User;
 
@@ -28,16 +29,60 @@ public class PrivateMessage {
 	@Column(columnDefinition="boolean default true")
 	boolean toVisable;
 
-	public User getTo() {
-		return this.to;
+	String topic;
+	String body;
+
+	@Transient
+	private String toStr;
+	/**
+	 * @param to the to to set
+	 */
+	public void setTo(User to) {
+		this.to = to;
+	}
+
+	public void setTo(String to) {
+		this.toStr = to;
+	}
+
+	/**
+	 * @return the toStr
+	 */
+	public String getToStr() {
+		return toStr;
+	}
+
+	/**
+	 * @return the body
+	 */
+	public String getBody() {
+		return body;
+	}
+
+	/**
+	 * @return the topic
+	 */
+	public String getTopic() {
+		return topic;
+	}
+
+	/**
+	 * @param from the from to set
+	 */
+	public void setFrom(User from) {
+		this.from = from;
+	}
+
+	public String getTo() {
+		return this.to.getUsername();
 	}
 
 	public void setToVisable(boolean b) {
 		this.toVisable = b;
 	}
 
-	public User getFrom() {
-		return this.from;
+	public String getFrom() {
+		return this.from.getUsername();
 	}
 
 	public void setFromVisable(boolean b) {

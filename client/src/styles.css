@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+.container {
+  margin-top: 50px;
+}
+
+.icon-extra-style {
+  font-size: 60px;
+}
