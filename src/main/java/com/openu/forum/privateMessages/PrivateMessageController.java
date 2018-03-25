@@ -52,7 +52,7 @@ public class PrivateMessageController {
 			m.setToVisable(false);
 		}
 
-		else if(m.getFrom().equals(user.getUsername())) {
+		if(m.getFrom().equals(user.getUsername())) {
 			m.setFromVisable(false);
 		}
 		

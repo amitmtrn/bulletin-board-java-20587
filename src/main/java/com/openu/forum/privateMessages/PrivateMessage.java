@@ -1,6 +1,5 @@
 package com.openu.forum.privateMessages;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,10 +22,7 @@ public class PrivateMessage {
 	@ManyToOne
 	User to;
 
-	@Column(columnDefinition="boolean default true")
 	boolean fromVisable = true;
-
-	@Column(columnDefinition="boolean default true")
 	boolean toVisable = true;
 
 	String topic;
