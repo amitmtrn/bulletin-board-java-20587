@@ -18,14 +18,14 @@ export class PrivateMessagesService {
   sendPrivateMessage(privateMessage): Observable<any> {
     const headers = this.auth.getHeaders();
 
-    return this.http.post(`/api/new-message`, privateMessage, { headers });
+    return this.http.post(`/api/private-messages`, privateMessage, { headers });
   }
 
-  // deletePrivateMessage(commentId: string) {
-  //   const headers = this.auth.getHeaders();
+  deletePrivateMessage(privateMessageId: number) {
+    const headers = this.auth.getHeaders();
 
-  //   return this.http.delete(`/api/comments/${commentId}`, { headers });
-  // }
+    return this.http.delete(`/api/private-messages/${privateMessageId}`, { headers });
+  }
 
   getInboxMessages(): Observable<PrivateMessage[]> {
     const headers = this.auth.getHeaders();

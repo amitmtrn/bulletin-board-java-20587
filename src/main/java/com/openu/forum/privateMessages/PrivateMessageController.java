@@ -25,7 +25,7 @@ public class PrivateMessageController {
 	@Autowired
 	UserJpaRepository userRepository;
 	
-	@PostMapping("/api/new-message")
+	@PostMapping("/api/private-messages")
 	public PrivateMessage addPrivateMessage(@RequestBody PrivateMessage p, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User from = userRepository.findByUsername(userDetails.getUsername());
@@ -37,7 +37,7 @@ public class PrivateMessageController {
 		return repository.save(p);
 	}
 
-	@DeleteMapping("/api/new-message/{id}")
+	@DeleteMapping("/api/private-messages/{id}")
 	public PrivateMessage removePrivateMessage(@PathVariable("id") long id, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User user = userRepository.findByUsername(userDetails.getUsername());

@@ -24,10 +24,10 @@ public class PrivateMessage {
 	User to;
 
 	@Column(columnDefinition="boolean default true")
-	boolean fromVisable;
+	boolean fromVisable = true;
 
 	@Column(columnDefinition="boolean default true")
-	boolean toVisable;
+	boolean toVisable = true;
 
 	String topic;
 	String body;
@@ -50,6 +50,13 @@ public class PrivateMessage {
 	 */
 	public String getToStr() {
 		return toStr;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
 	}
 
 	/**

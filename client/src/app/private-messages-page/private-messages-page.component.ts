@@ -29,4 +29,10 @@ export class PrivateMessagesPageComponent implements OnInit {
 
   }
 
+  deletePrivateMessage(privateMessageId) {
+    this.pmService.deletePrivateMessage(privateMessageId).subscribe(() => {
+      this.ngOnInit();
+    });
+  }
+
 }

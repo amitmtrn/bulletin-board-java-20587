@@ -19,6 +19,7 @@
           <small>by:
             <span>{{privateMessage.from}}</span> - {{privateMessage.date}}
           </small>
+          <button (click)="deletePrivateMessage(privateMessage.id)" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>
         </div>
       </div>
     </div>
