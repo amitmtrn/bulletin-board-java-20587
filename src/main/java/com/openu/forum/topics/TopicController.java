@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.openu.forum.comments.*;
+import com.openu.forum.forumSubject.ForumSubject;
+import com.openu.forum.forumSubject.ForumSubjectJpaRepository;
 import com.openu.forum.users.*;
 
 @RestController
@@ -28,6 +30,9 @@ public class TopicController {
 	@Autowired
 	CommentJpaRepository commentRepository;
 	
+	@Autowired
+	ForumSubjectJpaRepository subjectRepository;
+	
 	@GetMapping("/api/topics")
 	public List<Topic> getAll() {
 		List<Topic> list = new ArrayList<Topic>();
@@ -36,12 +41,22 @@ public class TopicController {
 		return list;
 	}
 	
-	@PostMapping("/api/topics")
-	public Topic addTopic(@RequestBody Topic topic, Authentication authentication) {
+	@GetMapping("/api/{subjectId}/topics")
+	public List<Topic> getBySubject(@PathVariable(value = "subjectId") Long subjectId) {
+		List<Topic> list = new ArrayList<Topic>();
+		
+		topicRepository.findTopicsBySubject(subjectId).forEach(list::add);
+		return list;
+	}
+	
+	@PostMapping("/api/{subjectId}/topics")
+	public Topic addTopic(@PathVariable(value = "subjectId") Long subjectId, @RequestBody Topic topic, Authentication authentication) {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User user = userRepository.findByUsername(userDetails.getUsername());
-		
+		ForumSubject subject = subjectRepository.findById(subjectId).get();
+
 		topic.setUser(user);
+		topic.setSubject(subject);
 
 		return topicRepository.save(topic);
 	}

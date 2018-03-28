@@ -33,14 +33,14 @@ export class TopicService {
     return this.http.delete(`/api/comments/${commentId}`, { headers });
   }
 
-  addTopic(topic): Observable<Topic> {
+  addTopic(subjectId, topic): Observable<Topic> {
     const headers = this.auth.getHeaders();
 
-    return this.http.post<Topic>('/api/topics', topic, { headers });
+    return this.http.post<Topic>(`/api/${subjectId}/topics`, topic, { headers });
   }
 
-  getTopics(): Observable<Topic[]> {
-    return this.http.get<Topic[]>('/api/topics');
+  getTopics(subjectId): Observable<Topic[]> {
+    return this.http.get<Topic[]>(`/api/${subjectId}/topics`);
   }
 
   deleteTopic(topicId: number) {

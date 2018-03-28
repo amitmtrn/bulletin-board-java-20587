@@ -16,9 +16,10 @@ export class AddTopicPageComponent implements OnInit {
   constructor(private topicService: TopicService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    if (this.route.snapshot.params.id) {
-      this.topicService.getTopics().subscribe(topics => {
-        this.topic = topics.find(topic => topic.id === parseInt(this.route.snapshot.params.id, 10));
+    // edit
+    if (this.route.snapshot.params.topicId) {
+      this.topicService.getTopics(this.route.snapshot.params.subjectId).subscribe(topics => {
+        this.topic = topics.find(topic => topic.id === parseInt(this.route.snapshot.params.topicId, 10));
         delete this.topic.user;
         delete this.topic.comments;
       });
@@ -26,7 +27,7 @@ export class AddTopicPageComponent implements OnInit {
   }
 
   addTopic() {
-    this.topicService.addTopic(this.topic).subscribe(() => {
+    this.topicService.addTopic(this.route.snapshot.params.subjectId, this.topic).subscribe(() => {
       this.router.navigate(['']);
     });
   }

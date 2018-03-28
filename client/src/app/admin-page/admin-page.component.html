@@ -1,0 +1,10 @@
+Subjects:
+<ul>
+  <li *ngFor="let subject of subjects">{{ subject.title }}</li>
+</ul>
+
+Add Subject:
+<form #f="ngForm" (ngSubmit)="addSubject(f.value)">
+  <input type="text" name="title" ngModel>
+  <button>add</button>
+</form>

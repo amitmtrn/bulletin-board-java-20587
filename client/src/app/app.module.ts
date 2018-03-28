@@ -10,6 +10,7 @@ import { NgxEditorModule } from 'ngx-editor';
 import { AuthService } from './auth.service';
 import { TopicService } from './topic.service';
 import { PrivateMessagesService } from './private-messages.service';
+import { ForumSubjectService } from './forum-subject.service';
 
 import { AppComponent } from './app.component';
 import { LoginPageComponent } from './login-page/login-page.component';
@@ -21,19 +22,23 @@ import { TopicComponent } from './topic/topic.component';
 import { AddCommentComponent } from './add-comment/add-comment.component';
 import { PrivateMessagesPageComponent } from './private-messages-page/private-messages-page.component';
 import { SendMessagePageComponent } from './send-message-page/send-message-page.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
+import { ForumPageComponent } from './forum-page/forum-page.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'add-topic', component: AddTopicPageComponent },
-  { path: 'edit-topic/:id', component: AddTopicPageComponent },
+  { path: 'add-topic/:subjectId', component: AddTopicPageComponent },
+  { path: 'edit-topic/:subjectId/:topicId', component: AddTopicPageComponent },
   { path: 'edit-comment/:topicId/:commentId', component: AddCommentComponent },
-  { path: 'add-comment/:topicId', component: AddCommentComponent },
+  { path: 'add-comment/:subjectId/:topicId', component: AddCommentComponent },
   { path: 'inbox', component: PrivateMessagesPageComponent, data: {type: 'inbox'} },
   { path: 'outbox', component: PrivateMessagesPageComponent, data: {type: 'outbox'} },
   { path: 'send-message', component: SendMessagePageComponent },
-  { path: 'topic/:id', component: TopicComponent },
+  { path: 'subject/:subjectId/topic/:topicId', component: TopicComponent },
   { path: 'login', component: LoginPageComponent },
   { path: 'register', component: RegisterPageComponent },
+  { path: 'subject/:subjectId', component: ForumPageComponent },
+  { path: 'admin', component: AdminPageComponent },
   { path: '**', component: Error404PageComponent }
 ];
 
@@ -48,7 +53,9 @@ const routes: Routes = [
     TopicComponent,
     AddCommentComponent,
     PrivateMessagesPageComponent,
-    SendMessagePageComponent
+    SendMessagePageComponent,
+    AdminPageComponent,
+    ForumPageComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +66,13 @@ const routes: Routes = [
     NgbModule.forRoot(),
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService, TopicService, LocalStorageService, PrivateMessagesService],
+  providers: [
+    AuthService,
+    TopicService,
+    LocalStorageService,
+    PrivateMessagesService,
+    ForumSubjectService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

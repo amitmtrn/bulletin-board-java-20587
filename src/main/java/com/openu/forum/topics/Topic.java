@@ -1,5 +1,6 @@
 package com.openu.forum.topics;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,10 +9,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.openu.forum.comments.Comment;
+import com.openu.forum.forumSubject.ForumSubject;
 import com.openu.forum.users.User;
 
 @Entity
@@ -35,6 +40,36 @@ public class Topic  {
 	@OneToMany
 	List<Comment> comments;
 
+	@OneToOne
+	ForumSubject subject;
+
+  private Date created;
+  private Date updated;
+
+  @PrePersist
+  protected void onCreate() {
+    created = new Date();
+  }
+
+  @PreUpdate
+  protected void onUpdate() {
+    updated = new Date();
+	}
+
+	/**
+	 * @return the created
+	 */
+	public Date getCreated() {
+		return created;
+	}
+
+	/**
+	 * @return the updated
+	 */
+	public Date getUpdated() {
+		return updated;
+	}
+	
 	/**
 	 * @param body the body to set
 	 */
@@ -87,6 +122,20 @@ public class Topic  {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	/**
+	 * @param subject the subject to set
+	 */
+	public void setSubject(ForumSubject subject) {
+		this.subject = subject;
+	}
+
+	/**
+	 * @return the subject
+	 */
+	public ForumSubject getSubject() {
+		return subject;
 	}
 
 	/**

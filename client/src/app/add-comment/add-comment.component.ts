@@ -15,7 +15,8 @@ export class AddCommentComponent implements OnInit {
 
   constructor(private topicService: TopicService, private router: Router, private route: ActivatedRoute) {
     if (route.snapshot.params.commentId) {
-      this.topicService.getTopics().subscribe(topics => {
+      this.topicService.getTopics(this.route.snapshot.params.subjectId)
+      .subscribe(topics => {
         const topic = topics.find(tp => tp.id === parseInt(this.route.snapshot.params.topicId, 10));
         this.comment = topic.comments.find(comment => comment.id === parseInt(this.route.snapshot.params.commentId, 10));
         delete this.comment.user;
@@ -28,7 +29,7 @@ export class AddCommentComponent implements OnInit {
 
   addComment(): void {
     this.topicService.addComment(this.route.snapshot.params.topicId, this.comment).subscribe(() => {
-      this.router.navigate(['topic', this.route.snapshot.params.topicId]);
+      this.router.navigate(['subject', this.route.snapshot.params.subjectId, 'topic', this.route.snapshot.params.topicId]);
     });
   }
 

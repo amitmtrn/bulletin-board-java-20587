@@ -1,46 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { TopicService, Topic, Comment } from '../topic.service';
 import { Router } from '@angular/router';
+import { ForumSubjectService } from '../forum-subject.service';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-  topics: Topic[] = [];
+  subjects: any[] = [];
 
-  constructor(private topicService: TopicService, private router: Router) { }
+  constructor(private subjectService: ForumSubjectService, private router: Router) { }
 
   ngOnInit() {
     this.updateTopics();
   }
 
   updateTopics() {
-    this.topicService.getTopics().subscribe(topics => {
-      this.topics = topics;
+    this.subjectService.getForumSubjects().subscribe(subjects => {
+      this.subjects = subjects;
     });
   }
-
-  deleteTopic(topicId: number) {
-    const isDeleting = confirm('are you sure you want to delete this topic??');
-
-    if (isDeleting) {
-      this.topicService.deleteTopic(topicId).subscribe(res => {
-        this.updateTopics();
-      });
-    }
-  }
-
-  addComment(topicId: number, comment: Comment): void {
-    this.topicService.addComment(topicId, comment).subscribe(res => {
-      this.updateTopics();
-    });
-  }
-
-  deleteComment(commentId: string) {
-    this.topicService.deleteComment(commentId).subscribe(() => {
-      this.updateTopics();
-    });
-  }
-
 }

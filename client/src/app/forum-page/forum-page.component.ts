@@ -1,23 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Topic, TopicService } from '../topic.service';
+import { TopicService, Topic, Comment } from '../topic.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-topic',
-  templateUrl: './topic.component.html',
-  styleUrls: ['./topic.component.css']
+  selector: 'app-forum-page',
+  templateUrl: './forum-page.component.html',
+  styleUrls: ['./forum-page.component.css']
 })
-export class TopicComponent implements OnInit {
-  topic: Topic = {
-    id: 0,
-    title: '',
-    body: '',
-    comments: []
-  };
-  subjectId: string;
+export class ForumPageComponent implements OnInit {
+  topics: Topic[] = [];
+  subjectId: number;
 
   constructor(private topicService: TopicService, private router: Router, private route: ActivatedRoute) {
-    this.subjectId = this.route.snapshot.params.subjectId;
+    this.subjectId = route.snapshot.params.subjectId;
   }
 
   ngOnInit() {
@@ -26,7 +21,7 @@ export class TopicComponent implements OnInit {
 
   updateTopics() {
     this.topicService.getTopics(this.subjectId).subscribe(topics => {
-      this.topic = topics.find(topic => topic.id === parseInt(this.route.snapshot.params.topicId, 10));
+      this.topics = topics;
     });
   }
 
@@ -35,9 +30,15 @@ export class TopicComponent implements OnInit {
 
     if (isDeleting) {
       this.topicService.deleteTopic(topicId).subscribe(res => {
-        this.router.navigate(['subject', this.subjectId]);
+        this.updateTopics();
       });
     }
+  }
+
+  addComment(topicId: number, comment: Comment): void {
+    this.topicService.addComment(topicId, comment).subscribe(res => {
+      this.updateTopics();
+    });
   }
 
   deleteComment(commentId: string) {

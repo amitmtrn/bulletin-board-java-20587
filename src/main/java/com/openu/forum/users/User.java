@@ -20,6 +20,13 @@ public class User {
 	Boolean enabled = true;
 	String role = "USER";
 	
+	/**
+	 * @return the role
+	 */
+	public String getRole() {
+		return role;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
