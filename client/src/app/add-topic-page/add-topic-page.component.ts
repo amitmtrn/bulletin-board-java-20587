@@ -28,7 +28,7 @@ export class AddTopicPageComponent implements OnInit {
 
   addTopic() {
     this.topicService.addTopic(this.route.snapshot.params.subjectId, this.topic).subscribe(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['subject', this.route.snapshot.params.subjectId]);
     });
   }
 }

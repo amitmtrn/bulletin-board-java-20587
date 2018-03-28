@@ -17,6 +17,7 @@ export class TopicComponent implements OnInit {
   };
   subjectId: string;
   user: User;
+  page = 1;
 
   constructor(
     private topicService: TopicService,
@@ -25,6 +26,14 @@ export class TopicComponent implements OnInit {
     private auth: AuthService
   ) {
     this.subjectId = this.route.snapshot.params.subjectId;
+  }
+
+  next() {
+    this.page ++;
+  }
+
+  previous() {
+    this.page --;
   }
 
   ngOnInit() {

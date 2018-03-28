@@ -24,6 +24,7 @@ import { PrivateMessagesPageComponent } from './private-messages-page/private-me
 import { SendMessagePageComponent } from './send-message-page/send-message-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import { ForumPageComponent } from './forum-page/forum-page.component';
+import { PaginationPipe } from './pagination.pipe';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
@@ -55,7 +56,8 @@ const routes: Routes = [
     PrivateMessagesPageComponent,
     SendMessagePageComponent,
     AdminPageComponent,
-    ForumPageComponent
+    ForumPageComponent,
+    PaginationPipe
   ],
   imports: [
     BrowserModule,

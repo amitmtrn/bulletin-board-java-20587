@@ -10,9 +10,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ForumPageComponent implements OnInit {
   topics: Topic[] = [];
   subjectId: number;
+  page = 1;
 
   constructor(private topicService: TopicService, private router: Router, private route: ActivatedRoute) {
     this.subjectId = route.snapshot.params.subjectId;
+  }
+
+  next() {
+    this.page ++;
+  }
+
+  previous() {
+    this.page --;
   }
 
   ngOnInit() {
@@ -21,7 +30,7 @@ export class ForumPageComponent implements OnInit {
 
   updateTopics() {
     this.topicService.getTopics(this.subjectId).subscribe(topics => {
-      this.topics = topics;
+      this.topics = topics.reverse();
     });
   }
 
