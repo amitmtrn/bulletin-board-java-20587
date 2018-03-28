@@ -43,6 +43,10 @@ public class User {
 		return this.id;
 	}
 
+	public boolean isAdmin() {
+		return this.role == "ADMIN";
+	}
+
 	/**
 	 * @return the username
 	 */

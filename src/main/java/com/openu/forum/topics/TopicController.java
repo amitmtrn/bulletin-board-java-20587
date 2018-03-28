@@ -41,7 +41,7 @@ public class TopicController {
 		return list;
 	}
 	
-	@GetMapping("/api/{subjectId}/topics")
+	@GetMapping("/api/topics/{subjectId}")
 	public List<Topic> getBySubject(@PathVariable(value = "subjectId") Long subjectId) {
 		List<Topic> list = new ArrayList<Topic>();
 		
@@ -49,16 +49,25 @@ public class TopicController {
 		return list;
 	}
 	
-	@PostMapping("/api/{subjectId}/topics")
-	public Topic addTopic(@PathVariable(value = "subjectId") Long subjectId, @RequestBody Topic topic, Authentication authentication) {
+	@PostMapping("/api/topics/{subjectId}")
+	public Topic addTopic(
+		@PathVariable(value = "subjectId") Long subjectId, 
+		@RequestBody Topic topic, 
+		Authentication authentication
+		) throws Exception {
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User user = userRepository.findByUsername(userDetails.getUsername());
 		ForumSubject subject = subjectRepository.findById(subjectId).get();
+
+		if(topic.getId() != 0 && !(topic.getUser().equals(user.getUsername()) || user.isAdmin())) {
+			throw new Exception("Permission denied!");
+		}
 
 		topic.setUser(user);
 		topic.setSubject(subject);
 
 		return topicRepository.save(topic);
+
 	}
 	
 	@DeleteMapping("/api/topics/{id}")
@@ -67,14 +76,17 @@ public class TopicController {
 		User user = userRepository.findByUsername(userDetails.getUsername());
 		Topic topic = topicRepository.findById(id).get();
 
-		if(topic.haveUser(user)) {
+		if(topic.haveUser(user) || user.isAdmin()) {
 			topicRepository.deleteById(id);
 		}
 
 	}
 
 	@PostMapping("/api/topics/{id}/comments")
-	public void addComment(@PathVariable(value = "id") Long id, @RequestBody Comment c, Authentication authentication) {
+	public void addComment(
+		@PathVariable(value = "id") Long id, 
+		@RequestBody Comment c, 
+		Authentication authentication) throws Exception {
 		Topic topic = topicRepository.findById(id).get();		
 		UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 		User user = userRepository.findByUsername(userDetails.getUsername());
@@ -82,6 +94,10 @@ public class TopicController {
 
 		c.setUser(user);
 		Comment comment = commentRepository.save(c);
+
+		if(commentId != 0 && !(comment.getUser().equals(user.getUsername()) || user.isAdmin())) {
+			throw new Exception("Permission denied!");
+		}
 
 		if(commentId == 0) {
 			topic.addComment(comment);
