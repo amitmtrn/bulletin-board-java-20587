@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit {
   private isLoggedIn = false;
+  private role = 'USER';
   private username = '';
 
   constructor(private auth: AuthService) {
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
         this.isLoggedIn = false;
       }
 
+      this.role = userDetails.role;
       this.username = userDetails.username;
     });
   }

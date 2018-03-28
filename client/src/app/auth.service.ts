@@ -6,10 +6,17 @@ import { LocalStorage, LocalStorageService } from 'angular2-localstorage';
 
 import 'rxjs/add/operator/map';
 
+export interface User {
+  id?: number;
+  username: string;
+  password?: string;
+  role?: string;
+}
+
 @Injectable()
 export class AuthService {
   @LocalStorage() private auth: string = null;
-  private userDetails: BehaviorSubject<{id: number, username: string}> = new BehaviorSubject({id: null, username: null});
+  private userDetails: BehaviorSubject<User> = new BehaviorSubject({id: null, username: null, role: null});
 
   constructor(private http: HttpClient, private localstorage: LocalStorageService) {
     const userInfo = localstorage.get('userInfo');
@@ -25,34 +32,42 @@ export class AuthService {
     });
   }
 
-  getUserDetails(): Observable<{id: number, username: string}> {
+  getUserDetails(): Observable<User> {
     return this.userDetails;
   }
 
-  setUserDetails(userDetails: {id: number, username: string}) {
+  setUserDetails(userDetails: User) {
     this.userDetails.next(userDetails);
     this.localstorage.set('userInfo', userDetails);
   }
 
-  register(details: {username: string, password: string}): Observable<boolean> {
+  register(details: User): Observable<boolean> {
     return this.http.post('/api/users', details)
-    .map((serverUserDetails: {id: number, password: string}) => {
+    .map((serverUserDetails: User) => {
       this.auth = 'Basic ' + btoa(`${details.username}:${details.password}`);
-      this.setUserDetails({id: serverUserDetails.id, username: details.username});
+      this.setUserDetails({
+        id: serverUserDetails.id,
+        username: details.username,
+        role: serverUserDetails.role
+      });
 
       return true;
     });
   }
 
-  login(userDetails: {username: string, password: string}): Observable<boolean> {
+  login(userDetails: User): Observable<boolean> {
     const auth = 'Basic ' + btoa(`${userDetails.username}:${userDetails.password}`);
     const headers = new HttpHeaders({
       Authorization: auth
     });
 
     return this.http.get('/api/users/me', { headers })
-    .map((serverUserDetails: {id: number, username: string}) => {
-      this.setUserDetails({id: serverUserDetails.id, username: userDetails.username});
+    .map((serverUserDetails: User) => {
+      this.setUserDetails({
+        id: serverUserDetails.id,
+        username: userDetails.username,
+        role: serverUserDetails.role
+      });
       this.auth = auth;
 
       return true;
@@ -61,6 +76,6 @@ export class AuthService {
 
   logout(): void {
     this.auth = null;
-    this.setUserDetails({id: null, username: null});
+    this.setUserDetails({id: null, username: null, role: null});
   }
 }

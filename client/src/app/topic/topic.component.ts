@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Topic, TopicService } from '../topic.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService, User } from '../auth.service';
 
 @Component({
   selector: 'app-topic',
@@ -15,12 +16,22 @@ export class TopicComponent implements OnInit {
     comments: []
   };
   subjectId: string;
+  user: User;
 
-  constructor(private topicService: TopicService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private topicService: TopicService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private auth: AuthService
+  ) {
     this.subjectId = this.route.snapshot.params.subjectId;
   }
 
   ngOnInit() {
+    this.auth.getUserDetails().subscribe(userDetails => {
+      this.user = userDetails;
+    });
+
     this.updateTopics();
   }
 
