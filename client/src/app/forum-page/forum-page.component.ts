@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicService, Topic, Comment } from '../topic.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService, User } from '../auth.service';
 
 @Component({
   selector: 'app-forum-page',
@@ -10,9 +11,15 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ForumPageComponent implements OnInit {
   topics: Topic[] = [];
   subjectId: number;
+  user: User;
   page = 1;
 
-  constructor(private topicService: TopicService, private router: Router, private route: ActivatedRoute) {
+  constructor(
+    private topicService: TopicService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private auth: AuthService
+  ) {
     this.subjectId = route.snapshot.params.subjectId;
   }
 
@@ -25,6 +32,10 @@ export class ForumPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.auth.getUserDetails().subscribe(userDetails => {
+      this.user = userDetails;
+    });
+
     this.updateTopics();
   }
 

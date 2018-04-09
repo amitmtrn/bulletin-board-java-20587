@@ -13,9 +13,7 @@ export class ForumSubjectService {
   constructor(private auth: AuthService, private http: HttpClient) { }
 
   getForumSubjects() {
-    const headers = this.auth.getHeaders();
-
-    return this.http.get<ForumSubject[]>('/api/subjects', { headers });
+    return this.http.get<ForumSubject[]>('/api/subjects');
   }
 
   addForumSubjects(subject: ForumSubject) {
