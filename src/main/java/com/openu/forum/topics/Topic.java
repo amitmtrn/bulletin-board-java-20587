@@ -19,6 +19,11 @@ import com.openu.forum.comments.Comment;
 import com.openu.forum.forumSubject.ForumSubject;
 import com.openu.forum.users.User;
 
+/**
+ * An entity class that contains the information of a single topic entry.
+ * @author amit and nir
+ *
+ */
 @Entity
 @Table(name = "topics")
 public class Topic  {
@@ -26,16 +31,21 @@ public class Topic  {
 	@Id
 	@GeneratedValue
 	long id;
-	
-	@Column(nullable=false)
+
+	@Column(nullable=false)				//  This column is NOT nullable.
 	String title;
-	
-	@Column(nullable=false)
+
+	@Column(nullable=false)				//  This column is NOT nullable.
 	String body;
-	
+
 	@ManyToOne
 	User user;
-	
+
+	/*
+	 * The list of comments to this topic.
+	 * We maintain the persistent order of list when being inserted into the database
+	 * and also retrieve the list in the order it was inserted.
+	 */
 	@OrderColumn
 	@OneToMany
 	List<Comment> comments;
@@ -43,47 +53,51 @@ public class Topic  {
 	@OneToOne
 	ForumSubject subject;
 
-  private Date created;
-  private Date updated;
+	private Date created;
+	private Date updated;
 
-  @PrePersist
-  protected void onCreate() {
-    created = new Date();
-  }
+	@PrePersist
+	protected void onCreate() {
+		created = new Date();
+	}
 
-  @PreUpdate
-  protected void onUpdate() {
-    updated = new Date();
+	@PreUpdate
+	protected void onUpdate() {
+		updated = new Date();
 	}
 
 	/**
-	 * @return the created
+	 * @return the creation time
 	 */
 	public Date getCreated() {
 		return created;
 	}
 
 	/**
-	 * @return the updated
+	 * @return the update time
 	 */
 	public Date getUpdated() {
 		return updated;
 	}
-	
+
 	/**
-	 * @param body the body to set
+	 * @param body - the body to set
 	 */
 	public void setBody(String body) {
 		this.body = body;
 	}
 
 	/**
-	 * @return the comments
+	 * @return the comments (as a list)
 	 */
 	public List<Comment> getComments() {
 		return comments;
 	}
-	
+
+	/**
+	 * Adds a single comment to this topic
+	 * @param comment - the comment to add
+	 */
 	public void addComment(Comment comment) {
 		this.comments.add(comment);
 	}
@@ -103,7 +117,7 @@ public class Topic  {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title - the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -114,12 +128,15 @@ public class Topic  {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id - the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
+	/**
+	 * @return the id
+	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -139,12 +156,19 @@ public class Topic  {
 	}
 
 	/**
-	 * @return the user
+	 * @return the user name
 	 */
 	public String getUser() {
 		return this.user.getUsername();
 	}
 
+	/**
+	 * Checks if a given user is identical to the user who open
+	 * this topic
+	 * @param user - the given user to compare to
+	 * @return true -  if the given user is identical to the user who open
+	 * this topic; false - otherwise
+	 */
 	public boolean haveUser(User user) {
 		return this.user.equals(user);
 	}

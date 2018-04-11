@@ -9,6 +9,11 @@ import javax.persistence.Table;
 
 import com.openu.forum.users.User;
 
+/**
+ * An entity class that contains the information of a single comment entry.
+ * @author amit and nir
+ *
+ */
 @Entity
 @Table(name="comments")
 public class Comment {
@@ -20,31 +25,34 @@ public class Comment {
 	@ManyToOne
 	User user;
 	
-	@Column(nullable=false)
+	@Column(nullable=false)			//  This column is NOT nullable.
 	String title;
 	
 	String body;
 
+	/**
+	 * @return the id
+	 */
 	public long getId() {
 		return this.id;
 	}
 
 	/**
-	 * @param user the user to set
+	 * @param user - the user to set
 	 */
 	public void setUser(User user) {
 		this.user = user;
 	}
 
 	/**
-	 * @param body the body to set
+	 * @param body - the body to set
 	 */
 	public void setBody(String body) {
 		this.body = body;
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title - the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
@@ -64,7 +72,7 @@ public class Comment {
 	}
 
 	/**
-	 * @return the user
+	 * @return the name of the user
 	 */
 	public String getUser() {
 		return this.user.getUsername();

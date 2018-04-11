@@ -6,6 +6,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * An entity class that contains the information of a single subject entry.
+ * 
+ * @author amit and nir
+ *
+ */
 @Entity
 @Table(name = "subjects")
 public class ForumSubject  {
@@ -14,7 +20,7 @@ public class ForumSubject  {
 	@GeneratedValue
 	long id;
 
-	@Column(unique=true)
+	@Column(unique=true)		// This column is a unique key
 	String title;
 
 	/**
@@ -32,14 +38,14 @@ public class ForumSubject  {
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param id - the id to set
 	 */
 	public void setId(long id) {
 		this.id = id;
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title - the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;

@@ -9,7 +9,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 /**
- * TopicComponent
+ * This component responsible for deletion of topics created at least 1 month ago.
+ *  
+ * @author amit and nir
+ *  
  */
 @Component
 public class TopicComponent {
