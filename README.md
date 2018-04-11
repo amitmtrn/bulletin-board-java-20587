@@ -2,8 +2,17 @@
 
 ## pre installation
 
-install nodejs
+[install nodejs](https://nodejs.org/en/download/package-manager/)
+
+install java
+```
+sudo apt-get install default-jdk
+```
+
 install maven
+```
+sudo apt-get install maven
+```
 
 ## installation
 
@@ -23,3 +32,7 @@ build the nodejs project
 npm run build
 ```
 
+run maven project
+```
+mvn spring-boot:run
+```
