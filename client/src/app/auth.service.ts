@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
-import { LocalStorage, LocalStorageService } from 'angular2-localstorage';
+import { LocalStorage, LocalStorageService } from 'ngx-store';
 
 import 'rxjs/add/operator/map';
 

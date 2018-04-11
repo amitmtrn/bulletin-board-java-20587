@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { WebStorageModule, LocalStorageService } from 'angular2-localstorage';
+import { WebStorageModule, LocalStorageService } from 'ngx-store';
 import { NgxEditorModule } from 'ngx-editor';
 
 import { AuthService } from './auth.service';

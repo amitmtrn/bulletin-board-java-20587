@@ -14,6 +14,8 @@ export interface Topic {
   title: string;
   body: string;
   comments: Comment[];
+  date?: Date;
+  user?: string;
 }
 
 @Injectable()

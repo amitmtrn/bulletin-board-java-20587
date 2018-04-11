@@ -7,9 +7,9 @@ import { AuthService } from './auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  private isLoggedIn = false;
-  private role = 'USER';
-  private username = '';
+  isLoggedIn = false;
+  role = 'USER';
+  username = '';
 
   constructor(private auth: AuthService) {
 
