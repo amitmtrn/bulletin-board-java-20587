@@ -21,17 +21,19 @@ download the project
 git clone https://github.com/amitmtrn/bulletin-board-java-20587.git
 ```
 
+### client folder - client side
 install the client side
 ```
 cd client
 npm install
 ```
 
-build the nodejs project
+build the client project
 ```
 npm run build
 ```
 
+### root folder - server side
 run maven project
 ```
 mvn spring-boot:run
