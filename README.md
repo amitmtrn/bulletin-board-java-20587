@@ -38,3 +38,5 @@ run maven project
 ```
 mvn spring-boot:run
 ```
+
+the server is accessible through `http://localhost:8080`
